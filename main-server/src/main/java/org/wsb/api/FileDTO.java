@@ -1,12 +1,19 @@
 package org.wsb.api;
 
+import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDate;
 
 @Data
+@Builder
 public class FileDTO {
-    private String id;
-    private LocalDate created;
-    private String uri;
+    private String url;
+
+    private String name;
+
+    private String owner;
+
+    private String type;
+
+    private byte[] data;
 }
