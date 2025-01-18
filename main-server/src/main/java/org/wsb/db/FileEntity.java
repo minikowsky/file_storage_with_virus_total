@@ -17,14 +17,10 @@ public class FileEntity {
     @Id
     @UuidGenerator
     private String id;
-
     private String name;
-
     private String owner;
-
     private String type;
 
     @Lob
     byte[] data;
-
 }

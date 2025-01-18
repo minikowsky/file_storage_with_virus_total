@@ -22,15 +22,14 @@ public class FileController {
     @PostMapping("/upload")
     @Secured("ROLE_UPLOAD")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam String owner) {
-        String message = "";
         try {
             fileService.store(file, owner);
 
-            message = "Uploaded the file successfully: " + file.getOriginalFilename();
-            return ResponseEntity.status(HttpStatus.OK).body(message);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("Uploaded the file successfully: " + file.getOriginalFilename());
         } catch (Exception e) {
-            message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(message);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Could not upload the file: " + file.getOriginalFilename() + "!");
         }
     }
 
@@ -40,7 +39,7 @@ public class FileController {
         List<FileDTO> files = fileService.getUserFiles().stream().map(dbFile -> {
             String fileDownloadUri = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
-                    .path("/files/")
+                    .path("/storage/files/")
                     .path(dbFile.getUrl())
                     .toUriString();
 

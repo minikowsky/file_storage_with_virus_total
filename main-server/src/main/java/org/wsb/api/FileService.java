@@ -26,15 +26,11 @@ public class FileService {
                 .data(file.getBytes())
                 .owner(owner)
                 .build();
-
         repository.save(enitity);
     }
 
     public List<FileDTO> getUserFiles() {
         final String user = AuthenticationHelper.getUser();
-        final var authorities = AuthenticationHelper.getAuthorities();
-        System.out.println(user);
-        System.out.println(authorities);
 
         return repository.findAllByOwner(user)
                 .stream()
@@ -43,8 +39,6 @@ public class FileService {
     }
 
     public Optional<FileDTO> getUserFile(String id) {
-        final String user = AuthenticationHelper.getUser();
-        final var authorities = AuthenticationHelper.getAuthorities();
         return mapFileData(repository.findById(id));
     }
 
