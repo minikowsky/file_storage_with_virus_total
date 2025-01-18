@@ -1,0 +1,19 @@
+server:
+  port: 15001
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:file:./../db/data
+    driverClassName: org.h2.Driver
+    username: appown
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+logging:
+  level:
+    org.springframework.security.web: DEBUG
